@@ -28,12 +28,12 @@ def list_factors(n):
     factors.append(int(1))
     max = math.sqrt(n)
     i = int(2)
-    while i < max:
+    while i <= max:
         if n % i == 0:
             d = int(n/i)
             factors.append(i)
-            factors.append(d)
-            max = d
+            if d != i:
+                factors.append(d)
         i = i + 1
     factors.append(n)
     return factors
