@@ -1,6 +1,6 @@
 
 import os
-import p012 #list_factor(n)
+import p12 #list_factor(n)
 
 '''
 A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
@@ -16,7 +16,7 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 def list_abundant(limit):
     abundant_numbers = list()
     for n in range(1,limit):
-        if sum(p012.list_factors(n)[:-1]) > n:
+        if sum(p12.list_factors(n)[:-1]) > n:
             abundant_numbers.append(n)
     return abundant_numbers
 

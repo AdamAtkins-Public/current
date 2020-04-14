@@ -1,7 +1,7 @@
 ﻿
 import os
 import time
-import p012 #list_factors(n)
+import p12 #list_factors(n)
 
 '''
 Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
@@ -13,7 +13,7 @@ Evaluate the sum of all the amicable numbers under 10000.
 '''
 
 def d(n):
-    return sum(p012.list_factors(n)[:-1])
+    return sum(p12.list_factors(n)[:-1])
 
 amicable_dict = dict()
 amicable_pairs = list()
