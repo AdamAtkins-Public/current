@@ -25,6 +25,6 @@ TensorFlow, PyTorch
     
     * MIT 6.00.2x
 
-* Deep Learinging with TensorFlow
+* Deep Learning with TensorFlow
 
     * IBM DL0120EN
