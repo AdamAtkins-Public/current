@@ -174,7 +174,7 @@ Do not submit this along with any of your answers. Uncomment the last two
 lines to print the result of your problem.
 """
 
-cows = load_cows("Online_Courses\\6.00.2x\\data\\ps1_cow_data.txt")
+cows = load_cows("Online_Courses\\MIT_6.00.2x\\data\\ps1_cow_data.txt")
 limit=10
 print(cows)
 

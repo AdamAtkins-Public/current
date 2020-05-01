@@ -17,8 +17,8 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed 
 '''
 
 def collect_diagonals(max_side):
-    down_right, down_left, up_left, up_right = list(), list(), list(), list()
-    diagonals = down_right, down_left, up_left, up_right
+    dr, dl, ul, ur = list(), list(), list(), list()
+    diagonals = (dr, dl, ul, ur)
     side = int(-1)
     count = int(1)
     while side < max_side:
