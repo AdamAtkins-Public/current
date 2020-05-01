@@ -21,10 +21,10 @@ TensorFlow, PyTorch
 
 ## Online Courses:
 
-*Introduction to Computational Thinking and Data Science
+* Introduction to Computational Thinking and Data Science
     
-    *MIT 6.00.2x
+    * MIT 6.00.2x
 
-*Deep Learinging with TensorFlow
+* Deep Learinging with TensorFlow
 
-    *IBM DL0120EN
+    * IBM DL0120EN
