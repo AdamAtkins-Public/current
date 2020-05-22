@@ -1,7 +1,6 @@
 
 import os
 import math
-import time
 
 '''
 The prime factors of 13195 are 5, 7, 13 and 29.
@@ -31,12 +30,3 @@ if __name__ == "__main__":
     print(gather_factors(n))
     n = 600851475143
     print(gather_factors(n))
-    n = 60085147514323941950914037510801238471857084560924856093459123489948325897234980759817239841
-    stime = time.time()
-    print(gather_factors(n))
-    print('Runtime:',time.time()-stime)
-    stime = time.time()
-    print(gather_factors(60085147514323941950914037510801238471857084560924856093))
-    print('Runtime:',time.time()-stime)
-
-
