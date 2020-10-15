@@ -19,14 +19,12 @@ def enter_records(hierarchy,records,vertex_index,edge_index):
         processed_record = record.split(sep=',')
 
         #enter keys
-        #TODO: needs to resolve key error
         if processed_record[vertex_index] not in hierarchy:
             hierarchy[processed_record[vertex_index]] = [[],[]]
         if processed_record[edge_index] not in hierarchy:
             hierarchy[processed_record[edge_index]] = [[],[]]
 
         #enter edges; assumes Superior->Subordinate
-        #TODO: reconfigure/minimize
         (hierarchy[processed_record[vertex_index]])[1].append(processed_record[edge_index])
         (hierarchy[processed_record[edge_index]])[0].append(processed_record[vertex_index])
 
@@ -45,17 +43,20 @@ def determine_tiers(hierarchy):
 
     tiers = [[]]
     depth = 0
-    return tier_delver(hierarchy,'',0,tiers)
+    return tier_delver(hierarchy,'',depth,tiers)
 
 def draw_hierarchy(hierarchy):
     pass
 
 if __name__ == '__main__':
-    hier = hierarchy()
+    #data
     path = 'C:\\Users\\ajatkins\\Documents\\Qualta\\VorteksTrainingData\\VorteksTrainingData\\SampleFiles\\Data\\Companies.csv'
     records = import_records(path)
     for record in records:
         print(record.__str__())
+    #structure
+    hier = hierarchy()
     enter_records(hier,records,3,2)
     print(determine_tiers(hier))
-    print('hello')
+    #communication
+    print('hello there')
