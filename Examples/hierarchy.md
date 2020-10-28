@@ -14,8 +14,12 @@ The Hierarchical Relationship is a direct connection between a superior and subo
 A hierachical relationship can be thought of as a directed acyclic graph.
 
 Constraints:
-	- No value can be superior to itself (acyclic)
-<img src="https://render.githubusercontent.com/render/math?math=\forall (x,y) \in R, x \neq y">
+ No value can be directly superior to itself (acyclic)
+	<img src="https://render.githubusercontent.com/render/math?math=\forall (x,y) \in R, x \neq y">
+
+ No value can be indirectly superior to itself (acyclic)
+	<img src="https://render.githubusercontent.com/render/math?math=\forall {(x,u),...,(v,y)}\subseteq R, x \neq y">
+
 ### Sources
 *Discrete Mathematics with Applications*, 4th Edition, pages 446
 	For relation on a set.
