@@ -9,16 +9,18 @@ A relation on a set *V* is a relation from *V* to *V*
 
 <img src="https://render.githubusercontent.com/render/math?math=\forall x,y \in V, x \to y \Leftrightarrow x R y \Leftrightarrow (x,y) \in R">
 
-The Hierarchical Relationship is a direct connection between a superior and subordinate.
+The Hierarchical Relationship is a direct connection between a *Superior* and a *Subordinate*.
 
-A hierachical relationship can be thought of as a directed acyclic graph.
+The Hierarchical Relationship is *Irreflexive* and *Antisymmetric*, thus has an *Asymmetric* property.
 
-Constraints:
+A hierachical relationship can be thought of as a directed acyclic graph. 
 
- No value can be directly superior to itself (acyclic)
+**Constraints:**
+
+ No value can be directly superior to itself (irreflexive/acyclic)
 	<img src="https://render.githubusercontent.com/render/math?math=\forall (x,y) \in R, x \neq y">
 
- No value can be indirectly superior to itself (acyclic)
+ No value can be indirectly superior to itself (asymmetric/acyclic)
 	<img src="https://render.githubusercontent.com/render/math?math=\forall \{(x,u),...,(u,y)\} \subseteq R, x \neq y">
 
 ### Sources
