@@ -1,6 +1,7 @@
 
 import os
 import time
+import string
 
 """
 The nth term of the sequence of triangle numbers is given by, tn = (1/2)n(n+1); so the first ten triangle numbers are:
@@ -29,24 +30,30 @@ def convert_word(word, values):
         value += int(values[letter])
     return int(value)
 
-values = {
-           'A':1, 'B':2, 'C':3, 'D':4, 'E':5,\
-           'F':6, 'G':7, 'H':8, 'I':9, 'J':10,\
-           'K':11, 'L':12, 'M':13, 'N':14, 'O':15,\
-           'P':16, 'Q':17, 'R':18, 'S':19, 'T':20,\
-           'U':21, 'V':22, 'W':23, 'X':24, 'Y':25, 'Z':26
-         }
+#values = {
+#           'A':1, 'B':2, 'C':3, 'D':4, 'E':5,\
+#           'F':6, 'G':7, 'H':8, 'I':9, 'J':10,\
+#           'K':11, 'L':12, 'M':13, 'N':14, 'O':15,\
+#           'P':16, 'Q':17, 'R':18, 'S':19, 'T':20,\
+#           'U':21, 'V':22, 'W':23, 'X':24, 'Y':25, 'Z':26
+#         }
+
+#Neat reduction from Project Euler thread
+values = dict(zip(string.ascii_uppercase,range(1,27)))
 
 if __name__ == '__main__':
     stime = time.time()
     path = '\Project_Euler\python\data\p042_words.txt'
     words = load_words(os.getcwd()+path)
     triangle_numbers = {-1:-1}
+    max_triangle_number = -1
     word_count = 0
     for word in words:
         word_value = convert_word(word, values)
-        while(word_value > max(triangle_numbers.values())):
-            triangle_numbers[len(triangle_numbers)] = triangle_number(len(triangle_numbers))
+        while(word_value > max_triangle_number):
+            next_triangle_number = triangle_number(len(triangle_numbers))
+            triangle_numbers[len(triangle_numbers)] = next_triangle_number 
+            max_triangle_number = next_triangle_number
         if word_value in triangle_numbers.values():
             word_count += 1
     print("Number of triangle words: {0}\nRuntime: {1}".format(word_count,time.time()-stime))
