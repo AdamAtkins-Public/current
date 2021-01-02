@@ -61,7 +61,7 @@ public class P039
         Console.WriteLine(SideLengths(p));
     }
 
-	static void Main()
+    static void Main()
     {
         TestSideLengths(120);
     }
