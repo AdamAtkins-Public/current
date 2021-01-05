@@ -32,4 +32,3 @@ if __name__ == '__main__':
             break
 
     print("Solution: {0}\n Runtime: {1}".format(next_hexagonal,time.time()-stime))
-    pass
