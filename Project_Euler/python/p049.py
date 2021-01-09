@@ -1,5 +1,4 @@
 import os
-import math
 import time
 
 """
@@ -17,7 +16,7 @@ def is_prime(n):
         return False
     if n & 1 == 0:
         return False
-    for i in range(3, math.ceil(math.sqrt(n)+1), 2):
+    for i in range(3,int(n**0.5),2):
         if n % i == 0:
             return False
     return True
