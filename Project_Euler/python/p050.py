@@ -11,6 +11,7 @@ The longest sum of consecutive primes below one-thousand that adds to a prime, c
 
 Which prime, below one-million, can be written as the sum of the most consecutive primes?
 """
+# To improve runtime, store prime sums to limit, iteratively reduce lists by removing min and max locating consectuve primes sum
 
 def gather_primes(limit):
     primes = {2:1}
