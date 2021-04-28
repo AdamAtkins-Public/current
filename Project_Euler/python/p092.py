@@ -14,50 +14,53 @@ Therefore any chain that arrives at 1 or 89 will become stuck in an endless loop
 How many starting numbers below ten million will arrive at 89?
 """
 
-def sum_square_digits(n,squares):
-    return sum(squares[int(digit)] for digit in n.__str__())
+def square_sum(squares,n):
+    k = int(0)
+    while(n):
+        k += squares[n % 10]
+        n = n // 10
+    return k
 
-def resolve_chain(values,n,squares):
-    if n in values[1]:
-        return 1
-    elif n in values[0]:
+def insert_chain(cache,chain):
+    for n in chain:
+        cache[n] = None
+
+def resolve(squares,cache,n):
+    n = square_sum(squares,n)
+    if n in cache:
         return 0
     else:
-        chain = [n]
-        while True:
-            if n in values[1]:
-                enter_chain(values[1],chain)
-                return 1
-            if n in values[0]:
-                enter_chain(values[0],chain)
-                return 0
-            n = sum_square_digits(n,squares)
-            if n in chain:
-                if n == 1:
-                    enter_chain(values[0],chain)
-                    return 0
-                if n == 89:
-                    for value in chain:
-                        enter_chain(values[1],chain)
-                    return 1
+        return 1
+
+def resolve_chain(squares,cache,n):
+    chain = [n]
+    while True:
+        if n in cache:
+            insert_chain(cache,chain)
+            break
+        if n == 89:
+            break
+        else:
+            n = square_sum(squares,n)
             chain.append(n)
 
-def enter_chain(value,chain):
-    for n in chain:
-        value[n] = 1
+
 
 if __name__ == '__main__':
 
     stime = time.time()
 
+    cache = {1:None}
     squares = dict()
-    for i in range(10):
-        squares[i] = i**2
 
-    values = [dict(),dict()]
+    for i in range(0,10):
+        squares[i] = i*i
+
+    for i in range(1,(7*(9**2))+1):
+        resolve_chain(squares,cache,i)
+
     count = int(0)
-
     for n in range(1,10**7):
-        count += resolve_chain(values,n,squares)
+        count += resolve(squares,cache,n)
         
     print("Solution:{} Runtime:{}".format(count,time.time()-stime))
