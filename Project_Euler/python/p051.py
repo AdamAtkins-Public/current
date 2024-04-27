@@ -75,7 +75,7 @@ def solution_found(query,primes):
     return False
 
 #implementation sieve of Eratothenes with numpy arrays, returns python dict with primes as keys
-def erato_seive(max):
+def erato_sieve(max):
     primes = np.ones(max+1,dtype=int)
     primes[0] = 0
     primes[1] = 0
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     solution = None
     while solution is None:
         max = "9"*(n)
-        primes = erato_seive(int(max))
+        primes = erato_sieve(int(max))
         solution = primes_search(primes)
         n += 1
     print("Solution:{} Runtime:{}".format(solution, time.time()-stime))
