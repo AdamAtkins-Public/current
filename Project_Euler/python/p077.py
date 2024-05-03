@@ -21,7 +21,7 @@ def prime_summations(initial_value, initial_prime, primes):
 	query = initial_value
 	summations = 0
 	prime_index = initial_prime
-	queue = list()
+	stack = list()
 
 	while True:
 
@@ -35,24 +35,23 @@ def prime_summations(initial_value, initial_prime, primes):
 
 			prime_index -= 1
 			if prime_index < 0:
-				if len(queue)==0: break
-				query, prime_index = queue.pop()
+				if len(stack)==0: break
+				query, prime_index = stack.pop()
 			else:
-				queue.append((remainder,prime_index))
+				stack.append((remainder,prime_index))
 		else:
 			if prime_index > 0:
-				queue.append((query,prime_index-1))
+				stack.append((query,prime_index-1))
 			query = remainder
 
 	return summations
 
 @runtime_calculator
 def p077():
-	summation = 0
 	#p077 summations limit
 	p077_limit = 5000
 
-	#number of primes
+	#the prime numbers up to limit
 	upper_limit = 1000
 
 	primes = list(erato_sieve(upper_limit))
