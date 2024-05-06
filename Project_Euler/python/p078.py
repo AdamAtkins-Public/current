@@ -29,7 +29,7 @@ def p078():
         return False if pn < divisor else pn % divisor == 0
 
     # Memoization of p(n)
-    memo = {0:1,1:1,2:2}
+    memo = [1,1,2]
 
     #initial value of n
     n = 3
@@ -39,19 +39,18 @@ def p078():
     #Euler's pentagonal number reccurrence
     while True:
         partA = 0
+        partB = 0
         for k in range(1,n+1):
             partA = n - k*(3*k - 1)//2
             if partA < 0:
                 break
             sumA += pow(-1,k-1)*memo[partA]
-        partB = 0
-        for k in range(1,n+1):
-            partB = n - k*(3*k + 1)//2
-            if partB < 0:
-                break
-            sumB += pow(-1,k-1)*memo[partB]
 
-        memo[n] = sumA + sumB
+            partB = n - k*(3*k + 1)//2
+            if partB >= 0:
+                sumB += pow(-1,k-1)*memo[partB]
+
+        memo.append(sumA + sumB)
 
         if check_satisfiability_condition(memo[n]):break
 
