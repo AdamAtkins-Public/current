@@ -42,6 +42,14 @@ class World:
 
         return world
 
+    def percept(self,cell):
+        """
+            cell - (x,y) coordinate pair
+
+            returns the percept (FloorStatus.Name) of requested location
+        """
+        return self.world[cell[0]][cell[1]].name
+
     def update_cell(self,cell,status):
         """
             cell - (x,y) coordinate pair
@@ -82,3 +90,5 @@ if __name__ == '__main__':
     world = World(h,w,[(2,2)])
     print_world(world)
     print(world.performance_measure())
+    print(world.percept((2,2)))
+    print(world.percept((0,0)))
