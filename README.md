@@ -13,6 +13,9 @@ TensorFlow, PyTorch
 * Algoritms CLRS 3rd
   * Formation and analysis Python, C++
 
+* AI: A Modern Approach 3rd edition
+    * Programming exercises
+
 ## Projects:
 
 * Project Euler
