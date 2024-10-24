@@ -3,13 +3,15 @@ import random
 from vc_enum import FloorStatus as Status
 
 class World:
-    """ This is an implemenation of the 2d vacuum-cleaner world located on page 38 """
+    """ This is an implemenation of the 2d vacuum cleaner world located on page 38 """
 
     def __init__(self,height,width,distribution,shape):
         """
+           vacuum cleaner world generator
+
            height - y-axis 
            width - x-axis
-           distribution - list of coordinate pairs or empty list for random distribution
+           distribution - list of coordinate pairs or -1 for random distribution
            shape - list of coordinate pairs containing obstacles or empty list for none
         """
         self.height = int(height)
@@ -21,17 +23,15 @@ class World:
     def build(self):
         """
             generates world from values set by __init__
-
+            
             returns a 2d list of enum FloorStatus
         """
-        randomize = not self.distribution
+        randomize = self.distribution == -1
         shape = not self.shape
         world = []
-        x, y = 0, 0
 
         for x in range(self.width):
             world.append([])
-            y = 0
             for y in range(self.height):
                 # hand wavy 50/50
                 world[x].append(Status(round(random.random()))) \
@@ -39,32 +39,33 @@ class World:
                 world[x].append(Status.CLEAN)
 
         if not randomize:
-            for pair in self.distribution:
-                x, y = pair[0], pair[1]
+            for (x,y) in self.distribution:
                 world[x][y] = Status.DIRTY
 
         if not shape:
-            for pair in self.shape:
-                x, y = pair[0], pair[1]
+            for (x,y) in self.shape:
                 world[x][y] = Status.OBSTACLE
-
 
         return world
 
     def percept(self,cell):
         """
+            percept available to vacuum cleaner agent sensor
+
             cell - (x,y) coordinate pair
 
-            returns the percept (FloorStatus.Name) of requested location
+            returns the percept (FloorStatus) of requested location
         """
-        return self.world[cell[0]][cell[1]].name
+        return self.world[cell[0]][cell[1]]
 
     def update_cell(self,cell,status):
         """
+            consequence of vacuum cleaner agent actuator
+
             cell - (x,y) coordinate pair
-            status - enum FloorStatus.NAME
+            status - enum FloorStatus.Name
         """
-        self.world[cell[0],cell[1]] = status
+        self.world[cell[0]][cell[1]] = status
 
     def performance_measure(self):
         """
@@ -86,7 +87,7 @@ if __name__ == '__main__':
         for y in range(world.height-1,-1,-1):
             line = ""
             for x in range(world.width):
-                line += " (x:{},y:{}):".format(x,y) + world.percept((x,y))
+                line += " (x:{},y:{}):".format(x,y) + (world.percept((x,y)).name)
             print(line)
 
     h, w = 3, 4
