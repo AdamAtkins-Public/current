@@ -29,15 +29,17 @@ Solution: vc_world.py
 	* With 2 possible statuses and 2 agent starting locations; the number of possible worlds is 2^3 
 
 * Results
-World   Score
-AOO      2000
-AXO      2000
-AOX      1999
-AXX      1998
-OOA      2000
-XOA      1999
-OXA      2000
-XXA      1998
+
+|World|Score|
+|:----|----:|
+|AOO|2000|
+|AXO|2000|
+|AOX|1999|
+|AXX|1998|
+|OOA|2000|
+|XOA|1999|
+|OXA|2000|
+|XXA|1998|
 
 Average:1999.25
 
