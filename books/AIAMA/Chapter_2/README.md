@@ -44,3 +44,23 @@ Solution: vc_world.py
 Average:1999.25
 
 Solution: simple_reflex_agent.py, exercise_9.py
+
+## 2.10 page 63
+
+"Consider a modified version of the vacuum environment in Exercise 2.8, in which the agent is penalized one point for each movement."
+
+* a. "Can a simple reflex agent be perfectly rational for this environment? Explain."
+
+No, the agent cannot be "perfectly" rational; for the agent to be "perfectly" rational there must be a guarantee that the action selected is to maximize the expected value of the performance measure. Since the agent is programmed to cover the environment, unnecessary movement occurs when the agent is moving back and forth between location A and location B.
+
+* b. "What about a reflex agent with state? Design such an agent."
+
+No, the agent must be programmed to cover the entire environment. Once the agent has determined that it has covered the entire environment, it can choose to remain at its current location. This reduces the unnecessary movement but is not "perfectly" rational since it may have made an unnecessary move.
+
+Solution: simple_reflex_agent_state.py
+
+* c. "How do your answers to **a** and **b** change if the agent's percepts give it the clean/dirty status of every square in the environment?"
+
+For the agent without state: if the percept contains a dirty status, and the agent does not account for relative positioning, then the agent may never issue a move action if the dirty status is in a different location.
+
+For the agent with state: the environment is fully observable from the percept, the agent has a complete model at the beginning of the process. The agent can be perfectly rational as this allows the agent to stop operation early without any unnecessary movement.
