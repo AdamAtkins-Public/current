@@ -77,7 +77,7 @@ No, the simple reflex agent must know the environment a priori for perfectly rat
 
 Yes, a simple reflex agent with a randomized agent function can have higher performance because it can operate in any environment.
 
-	* Environments:
+	 Environments:
 		The following are some layouts of the vacuum cleaner world. They will be displayed in markdown tables with the following symbols: H, X, O, A; 
 			where:
 				A - Agent's starting location
@@ -133,8 +133,10 @@ Yes, a simple reflex agent with a randomized agent function can have higher perf
 |H|O|O|O|O|O|O|O|O|O|H|
 |H|H|H|H|H|H|H|H|H|H|H|
 
-	* Results
-		The following are the minimum, maximum, and average scores for a simple reflex agent with a randomized program. The scores are gathered over 100 trials in each of the environments displayed above.
+
+The following are the minimum, maximum, and average scores for a simple reflex agent with a randomized program. The scores are gathered over 100 trials in each of the environments displayed above.
+
+Results:
 
 Map Name: Trivial
 Min Score: 269
@@ -160,12 +162,14 @@ Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
 * c. "Can you design an environment in which your randomized agent will perform poorly? Show your results."
 
-	The results are listed in *b*. The agent can perform poorly in: large environments with many dirty cells (ex. Living Room) and environments with long-narrow corridors (ex. Dirty Closet); but if it is lucky to navigate the areas, it has a chance to perform well. The agent will perform move actions that penalize the score when no further moves are necessary in smaller environments (ex. Trivial)
+The results are listed in **b**. The agent can perform poorly in: large environments with many dirty cells (ex. Living Room) and environments with long-narrow corridors (ex. Dirty Closet); but if it is lucky to navigate the areas, it has a chance to perform well. The agent will perform move actions that penalize the score when no further moves are necessary in smaller environments (ex. Trivial)
 
 * d. "Can a reflex agent with state outperform a simple reflex agent? Design such an agent and measure its performance on several environments. Can you design a rational agent of this type?"
-	A reflex agent with state can outperform a simple reflex agent without state. The state allows for opportunities to rationally issue a No Op action, which improves performance by reducing the movement penalty.  Without the use of search algorithms, my attempt at a rational simple reflex agent (agent.py: ReflexAgentState()) fails to cover the entire area of some environments. With A* and some DFS, an agent can be expected to rationally cover the entire environment.
 
-	* Results:
+A reflex agent with state can outperform a simple reflex agent without state. The state allows for opportunities to rationally issue a No Op action, which improves performance by reducing the movement penalty.  Without the use of search algorithms, my attempt at a rational simple reflex agent (agent.py: ReflexAgentState()) fails to cover the entire area of some environments. With A* and some DFS, an agent can be expected to rationally cover the entire environment.
+
+
+Results:
 
 Map Name: Trivial
 Min Score: 996
