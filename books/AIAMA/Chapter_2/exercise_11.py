@@ -3,7 +3,7 @@ from agent import RandomizedReflexAgent as RandomAgent
 from agent import ReflexAgentState as StateAgent
 import maps as Maps
 
-def main(Agent,steps,trials):
+def main(World,Agent,steps,trials):
     
     maps = [Maps.Trivial,
             Maps.Flooded_Basement,
@@ -41,8 +41,8 @@ if __name__ == "__main__":
 
     #Exercise 2.11.b
     print("Randomized Agent:\n")
-    main(RandomAgent,1000,100)
+    main(World,RandomAgent,1000,100)
 
     #Exercise 2.11.d
     print("Agent with state:\n")
-    main(StateAgent,1000,100)
+    main(World,StateAgent,1000,100)

@@ -62,38 +62,38 @@ class World():
                     score += 1
         return score
 
+    def is_move_action(self,action):
+        return action is Action.LEFT or  \
+               action is Action.RIGHT or \
+               action is Action.UP or    \
+               action is Action.DOWN
+
+    def is_legal_move(self,action):
+        legal = True
+        if action == Action.LEFT:
+            if self.world[self.agent_y][self.agent_x-1] == Status.OBSTACLE:
+                legal = False
+        if action == Action.RIGHT:
+            if self.world[self.agent_y][self.agent_x+1] == Status.OBSTACLE:
+                legal = False
+        if action == Action.UP:
+            if self.world[self.agent_y+1][self.agent_x] == Status.OBSTACLE:
+                legal = False
+        if action == Action.DOWN:
+            if self.world[self.agent_y-1][self.agent_x] == Status.OBSTACLE:
+                legal = False
+        return legal
+
     def step(self):
-
-        def is_move_action(action):
-            return action is Action.LEFT or  \
-                   action is Action.RIGHT or \
-                   action is Action.UP or    \
-                   action is Action.DOWN
-
-        def is_legal_move(action):
-            legal = True
-            if action == Action.LEFT:
-                if self.world[self.agent_y][self.agent_x-1] == Status.OBSTACLE:
-                    legal = False
-            if action == Action.RIGHT:
-                if self.world[self.agent_y][self.agent_x+1] == Status.OBSTACLE:
-                    legal = False
-            if action == Action.UP:
-                if self.world[self.agent_y+1][self.agent_x] == Status.OBSTACLE:
-                    legal = False
-            if action == Action.DOWN:
-                if self.world[self.agent_y-1][self.agent_x] == Status.OBSTACLE:
-                    legal = False
-            return legal
 
         action = self.agent.program(self.percept(self.agent_x,self.agent_y))
 
         if action == Action.SUCK:
             self.world[self.agent_y][self.agent_x] = Status.CLEAN
-        elif is_move_action(action):
+        elif self.is_move_action(action):
             self.score -= 1
 
-            if is_legal_move(action):
+            if self.is_legal_move(action):
                 if action == Action.LEFT:
                     self.agent_x -= 1
                 elif action == Action.RIGHT:
@@ -109,4 +109,31 @@ class World():
         self.score += self.performance_measure()
 
     __build = build
+
+class WorldBump(World):
+    def __init__(self,map):
+        super().__init__(map)
+
+    def step(self):
+
+        action = self.agent.program(self.percept(self.agent_x,self.agent_y))
+        if action == Action.SUCK:
+            self.world[self.agent_y][self.agent_x] = Status.CLEAN
+        elif self.is_move_action(action):
+            self.score -= 1
+
+            if self.is_legal_move(action):
+                if action == Action.LEFT:
+                    self.agent_x -= 1
+                elif action == Action.RIGHT:
+                    self.agent_x += 1
+                elif action == Action.UP:
+                    self.agent_y += 1
+                else:
+                    self.agent_y -= 1
+            else:
+                self.agent.set_bump(True)
+        else:
+            pass
+        self.score += self.performance_measure()
 

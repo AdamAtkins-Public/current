@@ -22,6 +22,14 @@ class RandomizedReflexAgent(Agent):
     def program(self,percept):
         return random.choice(list(Action))
 
+class RandomizedReflexAgentBump(RandomizedReflexAgent):
+    def __init__(self,world,x,y):
+        super().__init__(world,x,y)
+    
+    def set_bump(self,boolean):
+        pass
+
+
 class ReflexAgentState(Agent):
     def __init__(self,world,x,y):
         super().__init__(world,x,y)
@@ -64,4 +72,33 @@ class ReflexAgentState(Agent):
         self.state.append(((self.x,self.y),action))
         return action
 
+class ReflexAgentStateBump(ReflexAgentState):
+    def __init__(self,world,x,y):
+        super().__init__(world,x,y)
+        self.bump = False
+
+    def set_bump(self,boolean):
+        self.bump = boolean
+
+    def program(self,percept):
+        action = Action.NOOP
+        if percept == Status.DIRTY:
+            action = Action.SUCK
+        elif self.rotated > 8:
+            action = Action.NOOP
+        elif not self.bump:
+            action = self.action_priority[self.primary_action]
+            if not self.rotated == 0:
+                self.rotate_action_priority(False)
+        elif self.bump:
+            if self.state[-1] == self.action_priority[self.primary_action]:
+                action = self.action_priority[self.secondary_action]
+                self.set_bump(False)
+            elif self.state[-1] == self.action_priority[self.secondary_action]:
+                self.rotate_action_priority()
+                action = self.action_priority[self.secondary_action]
+                self.set_bump(False)
+                
+        self.state.append(action)
+        return action
 

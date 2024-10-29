@@ -77,13 +77,14 @@ No, the simple reflex agent must know the environment a priori for perfectly rat
 
 Yes, a simple reflex agent with a randomized agent function can have higher performance because it can operate in any environment.
 
-	 Environments:
+Environments:
 		The following are some layouts of the vacuum cleaner world. They will be displayed in markdown tables with the following symbols: H, X, O, A; 
 			where:
 				A - Agent's starting location
 				H - Wall or Obstacle
 				X - Dirty status
 				O - Clean status
+
 
 	* Trivial 3x3
 
@@ -136,7 +137,7 @@ Yes, a simple reflex agent with a randomized agent function can have higher perf
 
 The following are the minimum, maximum, and average scores for a simple reflex agent with a randomized program. The scores are gathered over 100 trials in each of the environments displayed above.
 
-Results:
+Results
 
 Map Name: Trivial
 Min Score: 269
@@ -169,9 +170,10 @@ The results are listed in **b**. The agent can perform poorly in: large environm
 A reflex agent with state can outperform a simple reflex agent without state. The state allows for opportunities to rationally issue a No Op action, which improves performance by reducing the movement penalty.  Without the use of search algorithms, my attempt at a rational simple reflex agent (agent.py: ReflexAgentState()) fails to cover the entire area of some environments. With A* and some DFS, an agent can be expected to rationally cover the entire environment.
 
 
-Results:
+Results
 
 Map Name: Trivial
+
 Min Score: 996
 Max Score: 996
 Average Score: 996.0
@@ -193,3 +195,48 @@ Average Score: 45852.0
 
 Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
+## 2.12 page 63
+
+"Repeat Exercise 2.11 for the case in which the location sensor is replaced with "bump" sensor that detects the agent's attempts to move into an obstacle or to cross boundaries of the environment. Suppose the bump sensor stops working, how should the agent behave?'"
+
+If the bump sensor stops working, the agent should either revert to a randomized program or issue no op. Since it is not possible for the agent to determine whether the sensor is working or not, because it cannot track its location, the agent cannot rationally change its program.
+
+* a. "Can a simple reflex agent be perfectly rational for this environment? Explain."
+
+An agent without location tracking will not be able to determine the environment layout. Since knowledge of the dimensions of the environment are essential to expect perfect scores, the agent cannot be expected to be perfectly rational.
+
+* b. "Can a simple reflex agent with a randomized agent function outperform a simple reflex agent? Design such an agent and measure its performance on several environments."
+
+A randomized agent function does not make use of the bump sensor as it determines its action at random. The same agent and expected results are in common with Excersise 2.11.b.
+
+* c. "Can you design an environment in which your randomized agent will perform poorly? Show your results."
+
+The results are in common with Exercise 2.11.c.
+
+* d. "Can a reflex agent with state outperform a simple reflex agent? Design such an agent and measure its performance on several environments. Can you design a rational agent of this type?"
+
+I modified the agent design from 2.11.d by mapping its state interpretation to the bump sensor. The modifications resulted in a performance loss for the environment set.
+
+Results:
+
+Map Name: Trivial
+Min Score: 989
+Max Score: 989
+Average Score: 989.0
+
+Map Name: Flooded_Basement
+Min Score: 7897
+Max Score: 7897
+Average Score: 7897.0
+
+Map Name: Living_Room
+Min Score: 30499
+Max Score: 30499
+Average Score: 30499.0
+
+Map Name: Dirty_Closet
+Min Score: 45000
+Max Score: 45000
+Average Score: 45000.0
+
+Solution: exercise_12.py, modified_vc_world.py, agent.py
