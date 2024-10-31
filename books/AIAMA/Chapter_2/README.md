@@ -140,24 +140,24 @@ The following are the minimum, maximum, and average scores for a simple reflex a
 Results
 
 Map Name: Trivial
-Min Score: 269
-Max Score: 361
-Average Score: 325.59
+	Min Score: 269
+	Max Score: 361
+	Average Score: 325.59
 
 Map Name: Flooded_Basement
-Min Score: 7158
-Max Score: 8038
-Average Score: 7655.37
+	Min Score: 7158
+	Max Score: 8038
+	Average Score: 7655.37
 
 Map Name: Living_Room
-Min Score: 25780
-Max Score: 33644
-Average Score: 30238.0
+	Min Score: 25780
+	Max Score: 33644
+	Average Score: 30238.0
 
 Map Name: Dirty_Closet
-Min Score: 45304
-Max Score: 55687
-Average Score: 47253.6
+	Min Score: 45304
+	Max Score: 55687
+	Average Score: 47253.6
 
 Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
@@ -173,25 +173,24 @@ A reflex agent with state can outperform a simple reflex agent without state. Th
 Results
 
 Map Name: Trivial
-
-Min Score: 996
-Max Score: 996
-Average Score: 996.0
+	Min Score: 996
+	Max Score: 996
+	Average Score: 996.0
 
 Map Name: Flooded_Basement
-Min Score: 8816
-Max Score: 8816
-Average Score: 8816.0
+	Min Score: 8816
+	Max Score: 8816
+	Average Score: 8816.0
 
 Map Name: Living_Room
-Min Score: 30427
-Max Score: 30427
-Average Score: 30427.0
+	Min Score: 30427
+	Max Score: 30427
+	Average Score: 30427.0
 
 Map Name: Dirty_Closet
-Min Score: 45852
-Max Score: 45852
-Average Score: 45852.0
+	Min Score: 45852
+	Max Score: 45852
+	Average Score: 45852.0
 
 Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
@@ -220,23 +219,52 @@ I modified the agent design from 2.11.d by mapping its state interpretation to t
 Results:
 
 Map Name: Trivial
-Min Score: 989
-Max Score: 989
-Average Score: 989.0
+	Min Score: 989
+	Max Score: 989
+	Average Score: 989.0
 
 Map Name: Flooded_Basement
-Min Score: 7897
-Max Score: 7897
-Average Score: 7897.0
+	Min Score: 7897
+	Max Score: 7897
+	Average Score: 7897.0
 
 Map Name: Living_Room
-Min Score: 30499
-Max Score: 30499
-Average Score: 30499.0
+	Min Score: 30499
+	Max Score: 30499
+	Average Score: 30499.0
 
 Map Name: Dirty_Closet
-Min Score: 45000
-Max Score: 45000
-Average Score: 45000.0
+	Min Score: 45000
+	Max Score: 45000
+	Average Score: 45000.0
 
 Solution: exercise_12.py, modified_vc_world.py, agent.py
+
+## 2.13 page 63
+
+"The vacuum environments in the proceeding exercises have all been deterministic. Discuss possible agent programs for each of the following stochastic versions:"
+
+* a "Murphy's law: twenty-five percent of the time, the Suck action fails to clean the floor if it is dirty and deposits dirt onto the floor if the floor is clean. How is your agent program affected if the dirt sensor gives the wrong answer 10% of the time?"
+
+We will consider the cases, of having a False Positive and a False Negative, for the Dirty status.
+	False Positive:
+		The agent is in a cell that has Clean status, 10% the agent incorrectly detects dirt. The next action is the Suck action that has 25% chance of depositing dirt. The next percept has:
+			(.9)(.25) chance of detecting a deposit,
+			(.9)(.75) chance detecting a successful suction,
+			(.1)(.25) chance of missing the deposit,
+			(.1)(.75) chance of repeating the mistake
+
+		The agent will be rational in the first two cases 90% of the time, will completely fail 2.5% of the time, and will repeat the same mistake 7.5% of the time.
+
+	False Negative:
+		The agent is in a cell that has a Dirty status, 10% the agent incorrectly detects clean. If the next action is a move, then the agent will have completely failed. If the next action is a No Op then the next percept has:
+			(.1) chance sensor fails twice
+			(.9) chance the sensor reads correctly
+
+		The falty sensor will fail two reads in succession 1% of the time.
+
+False Negatives are extremely costly as the agent does not attempt to clean a dirty cell 10% of the time. False Positives are less costly since if it fails to succeed in the objective, there is 7.5% chance that it retrys; the action Suck does not have an associated cost.
+
+* b "Small children: At each time step, each clean square has a 10% chance of becoming dirty. Can you come up with a rational agent design for this case?"
+
+I modified the vc_world to simulate this case. For an area containing 10 cells, it can be expected that at least 1 cell becomes dirty. I have designed an agent, agents.py:TimedAgent, that covers an environment, maps.py:Clean, and has a variable time delay. From experimentation, the agent that operates non-stop obtains the highest score.

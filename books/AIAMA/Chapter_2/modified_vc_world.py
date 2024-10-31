@@ -2,6 +2,7 @@
 from agent_actions import Action
 from agent import ReflexAgentState as Agent
 import maps as Maps
+import random
 
 class World():
     def __init__(self,map):
@@ -49,7 +50,7 @@ class World():
 
     def add_agent(self,agent):
         self.agent = agent
-        agent.update_location(self.agent_x,self.agent_y)
+        self.agent.update_location(self.agent_x, self.agent_y)
 
     def percept(self,x,y):
         return self.world[y][x]
@@ -134,6 +135,43 @@ class WorldBump(World):
             else:
                 self.agent.set_bump(True)
         else:
+            pass
+        self.score += self.performance_measure()
+
+class WorldRandom(World):
+    def __init__(self,map):
+        super().__init__(map)
+
+    def get_dirty(self):
+        for x in range(self.width):
+            for y in range(self.height):
+                if self.world[y][x] != Status.OBSTACLE:
+                    if random.random() < 0.1:
+                        self.world[y][x] = Status.DIRTY
+
+    def step(self):
+
+        self.get_dirty()
+
+        action = self.agent.program(self.percept(self.agent_x,self.agent_y))
+
+        if action == Action.SUCK:
+            self.world[self.agent_y][self.agent_x] = Status.CLEAN
+        elif self.is_move_action(action):
+            self.score -= 1
+
+            if self.is_legal_move(action):
+                if action == Action.LEFT:
+                    self.agent_x -= 1
+                elif action == Action.RIGHT:
+                    self.agent_x += 1
+                elif action == Action.UP:
+                    self.agent_y += 1
+                else:
+                    self.agent_y -= 1
+
+                self.agent.update_location(self.agent_x,self.agent_y)
+        else: #No op
             pass
         self.score += self.performance_measure()
 

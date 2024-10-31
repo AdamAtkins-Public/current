@@ -48,3 +48,14 @@ def Dirty_Closet():
     ["H", "O", "O", "O", "O", "O", "O", "O", "O", "O", "H"], 
     ["H", "H", "H", "H", "H", "H", "H", "H", "H", "H", "H"]] 
     return env_map
+
+#Clean 6x6
+def Clean():
+    env_map = \
+    [["H", "H", "H", "H", "H", "H"], 
+    ["H", "OA", "O", "O", "O", "H"], 
+    ["H", "O", "O", "O", "O", "H"], 
+    ["H", "O", "O", "O", "O", "H"], 
+    ["H", "O", "O", "O", "O", "H"], 
+    ["H", "H", "H", "H", "H","H"]] 
+    return env_map

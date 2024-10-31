@@ -29,7 +29,6 @@ class RandomizedReflexAgentBump(RandomizedReflexAgent):
     def set_bump(self,boolean):
         pass
 
-
 class ReflexAgentState(Agent):
     def __init__(self,world,x,y):
         super().__init__(world,x,y)
@@ -102,3 +101,64 @@ class ReflexAgentStateBump(ReflexAgentState):
         self.state.append(action)
         return action
 
+class TimedAgent(Agent):
+    """
+        Agent made to run in exercise_13.py
+    """
+    def __init__(self,world,x,y,steps):
+        super().__init__(world,x,y)
+        self.move_vertically = False
+        self.start = (x,y)
+        self.end = (4,1)
+        self.wait_steps = steps
+        self.timer = 0
+        self.horizontal = Action.RIGHT
+        self.vertical = Action.DOWN
+        self.state = [(self.start,Action.NOOP)]
+
+    def switch_horz(self):
+        self.horizontal = Action.LEFT                       \
+                          if self.horizontal == Action.RIGHT\
+                          else Action.RIGHT
+
+    def switch_vert(self):
+        self.vertical = Action.UP                           \
+                        if self.vertical == Action.DOWN     \
+                        else Action.DOWN
+
+    def set_timer(self):
+        self.timer = self.wait_steps
+
+    def program(self,percept):
+
+        current_position = (self.x,self.y)
+        action = Action.NOOP
+
+        #Cycle maitenance
+        if(current_position == self.start or                \
+           current_position == self.end) and                \
+           current_position != self.state[-1][0]:
+            self.set_timer()
+            self.switch_vert()
+
+
+        if self.timer > 0:
+            self.timer -= 1
+            action = Action.NOOP
+        elif percept == Status.DIRTY:
+            action = Action.SUCK
+        elif self.move_vertically:
+            self.move_vertically = False
+            self.switch_horz()
+            action = self.vertical
+        else:
+            action = self.horizontal
+            if action == Action.RIGHT                       \
+            and current_position[0]+1 == 4:
+                self.move_vertically = True
+            if action == Action.LEFT                        \
+            and current_position[0]-1 == 1:
+                self.move_vertically = True
+
+        self.state.append(((current_position),action))
+        return action
