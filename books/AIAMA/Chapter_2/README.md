@@ -139,25 +139,12 @@ The following are the minimum, maximum, and average scores for a simple reflex a
 
 Results
 
-Map Name: Trivial
-	Min Score: 269
-	Max Score: 361
-	Average Score: 325.59
-
-Map Name: Flooded_Basement
-	Min Score: 7158
-	Max Score: 8038
-	Average Score: 7655.37
-
-Map Name: Living_Room
-	Min Score: 25780
-	Max Score: 33644
-	Average Score: 30238.0
-
-Map Name: Dirty_Closet
-	Min Score: 45304
-	Max Score: 55687
-	Average Score: 47253.6
+|Map name|Min score|Max score|Average score|
+|:---|---:|---:|---:|
+|Trivial|269|361|325.59|
+|Flooded_Basement|7158|8038|7655.37|
+|Living_Room|25780|33644|30238.0|
+|Dirty_Closet|45304|55687|47253.6|
 
 Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
@@ -170,27 +157,14 @@ The results are listed in **b**. The agent can perform poorly in: large environm
 A reflex agent with state can outperform a simple reflex agent without state. The state allows for opportunities to rationally issue a No Op action, which improves performance by reducing the movement penalty.  Without the use of search algorithms, my attempt at a rational simple reflex agent (agent.py: ReflexAgentState()) fails to cover the entire area of some environments. With A* and some DFS, an agent can be expected to rationally cover the entire environment.
 
 
-Results
+Results:
 
-Map Name: Trivial
-	Min Score: 996
-	Max Score: 996
-	Average Score: 996.0
-
-Map Name: Flooded_Basement
-	Min Score: 8816
-	Max Score: 8816
-	Average Score: 8816.0
-
-Map Name: Living_Room
-	Min Score: 30427
-	Max Score: 30427
-	Average Score: 30427.0
-
-Map Name: Dirty_Closet
-	Min Score: 45852
-	Max Score: 45852
-	Average Score: 45852.0
+|Map name|Min score|Max score|Average score|
+|:---|---:|---:|---:|
+|Trivial|996|996|996.0|
+|Flooded_Basement|8816|8816|8816.0|
+|Living_Room|30427|30427|30427.0|
+|Dirty_Closet|45852|45852|45852.0|
 
 Solution: exercise_11.py, modified_vc_world.py, agent.py, maps.py
 
@@ -218,25 +192,12 @@ I modified the agent design from 2.11.d by mapping its state interpretation to t
 
 Results:
 
-Map Name: Trivial
-	Min Score: 989
-	Max Score: 989
-	Average Score: 989.0
-
-Map Name: Flooded_Basement
-	Min Score: 7897
-	Max Score: 7897
-	Average Score: 7897.0
-
-Map Name: Living_Room
-	Min Score: 30499
-	Max Score: 30499
-	Average Score: 30499.0
-
-Map Name: Dirty_Closet
-	Min Score: 45000
-	Max Score: 45000
-	Average Score: 45000.0
+|Map name|Min score|Max score|Average score|
+|:---|---:|---:|---:|
+|Trivial|989|989|989.0|
+|Flooded_Basement|7897|7897|7897.0|
+|Living_Room|30499|30499|30499.0|
+|Dirty_Closet|45000|45000|45000.0|
 
 Solution: exercise_12.py, modified_vc_world.py, agent.py
 
@@ -247,6 +208,7 @@ Solution: exercise_12.py, modified_vc_world.py, agent.py
 * a "Murphy's law: twenty-five percent of the time, the Suck action fails to clean the floor if it is dirty and deposits dirt onto the floor if the floor is clean. How is your agent program affected if the dirt sensor gives the wrong answer 10% of the time?"
 
 We will consider the cases, of having a False Positive and a False Negative, for the Dirty status.
+
 	False Positive:
 		The agent is in a cell that has Clean status, 10% the agent incorrectly detects dirt. The next action is the Suck action that has 25% chance of depositing dirt. The next percept has:
 			(.9)(.25) chance of detecting a deposit,
